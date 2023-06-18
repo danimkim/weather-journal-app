@@ -11,7 +11,6 @@ const app = express();
 const bodyParser = require("body-parser");
 
 /* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -30,3 +29,24 @@ function listening() {
   console.log("server running");
   console.log(`running on localhost: ${port}`);
 }
+
+// GET
+// send projectData
+app.get("/data", (req, res) => {
+  consosle.log("GET requeset received");
+  res.send(projectData);
+});
+
+// POST
+app.post("/post", (req, res) => {
+  const data = req.body;
+  projectData["temperature"] = data.temperature;
+  projectData["date"] = data.date;
+  projectData["feeling"] = data.feeling;
+
+  res.send("post success");
+});
+
+app.get("/all", (req, res) => {
+  res.send(projectData);
+});
